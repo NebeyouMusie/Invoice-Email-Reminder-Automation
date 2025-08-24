@@ -14,19 +14,19 @@ Automate your invoice follow-ups effortlessly with n8n! This project streamlines
 
 - [Overview](#overview)
 - [How It Works](#how-it-works)
-  - [Workflow Steps](#workflow-steps)
+ - [Workflow Steps](#workflow-steps)
 - [Benefits](#benefits)
 - [Requirements](#requirements)
 - [Setup Instructions](#setup-instructions)
-  - [1. Clone or Import Workflow](#1-clone-or-import-workflow)
-  - [2. Connect Google Sheets](#2-connect-google-sheets)
-  - [3. Connect Gmail](#3-connect-gmail)
-  - [4. Customize Email Templates](#4-customize-email-templates)
-  - [5. Schedule the Trigger](#5-schedule-the-trigger)
-  - [6. Test the Workflow](#6-test-the-workflow)
+ - [1. Clone or Import Workflow](#1-clone-or-import-workflow)
+ - [2. Connect Google Sheets](#2-connect-google-sheets)
+ - [3. Connect Gmail](#3-connect-gmail)
+ - [4. Customize Email Templates](#4-customize-email-templates)
+ - [5. Schedule the Trigger](#5-schedule-the-trigger)
+ - [6. Test the Workflow](#6-test-the-workflow)
 - [Customization](#customization)
-  - [Invoice Data Sheet Structure](#invoice-data-sheet-structure)
-  - [Email Message Personalization](#email-message-personalization)
+ - [Invoice Data Sheet Structure](#invoice-data-sheet-structure)
+ - [Email Message Personalization](#email-message-personalization)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
@@ -62,26 +62,26 @@ Automate your invoice follow-ups effortlessly with n8n! This project streamlines
 - Initiates the workflow daily at a preset time.
 
 
-2. **Get Row(s) in Sheet:**  
-   - Retrieves all invoice records from a specified Google Sheets document.
+2. **Get Row(s) in Sheet:**
+- Retrieves all invoice records from a specified Google Sheets document.
 
 
-3. **Filter Unsent Messages:**  
-   - Filters out invoices where a reminder or thank-you email hasn’t yet been sent (avoids duplicates).
+3. **Filter Unsent Messages:**
+- Filters out invoices where a reminder or thank-you email hasn’t yet been sent (avoids duplicates).  
+  
+
+4. **Switch (Invoice Status Check):**
+- Evaluates the payment status for each invoice: Unpaid, Partial Paid, or Paid.
+  
+
+5. **Send Email via Gmail:**
+- **Unpaid:** Sends a reminder message.
+- **Partial:** Sends a partial payment reminder.
+- **Paid:** Sends a thank-you message.  
 
 
-4. **Switch (Invoice Status Check):**  
-   - Evaluates the payment status for each invoice: Unpaid, Partial Paid, or Paid.
-
-
-5. **Send Email via Gmail:**  
-   - **Unpaid:** Sends a reminder message.
-   - **Partial:** Sends a partial payment reminder.
-   - **Paid:** Sends a thank-you message.
-
-
-6. **Update Sheet**  
-   After sending, updates the Google Sheets row to mark the message as sent.
+6. **Update Sheet**
+- After sending, updates the Google Sheets row to mark the message as sent.
 
 
 ***
@@ -104,8 +104,8 @@ Automate your invoice follow-ups effortlessly with n8n! This project streamlines
 
 - [n8n](https://n8n.io/) installation or cloud account
 - Google account with:
-  - Access to Google Sheets (your invoice tracker)
-  - Access to Gmail (for sending emails)
+ - Access to Google Sheets (your invoice tracker)
+ - Access to Gmail (for sending emails)
 - Invoice data in Google Sheets
 
 
