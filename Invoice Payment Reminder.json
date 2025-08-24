@@ -1,0 +1,507 @@
+{
+  "name": "Invoice Payment Reminder",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "13j7UMMSb0w_uK3-W4zVHZBUN0NYL-lBBGx7MSkXUilE",
+          "mode": "list",
+          "cachedResultName": "INVOICE",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13j7UMMSb0w_uK3-W4zVHZBUN0NYL-lBBGx7MSkXUilE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1179058943,
+          "mode": "list",
+          "cachedResultName": "Invoice Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13j7UMMSb0w_uK3-W4zVHZBUN0NYL-lBBGx7MSkXUilE/edit#gid=1179058943"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -320,
+        -16
+      ],
+      "id": "45ed1880-33d4-4fb5-ac07-376979260e5b",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "puIDvD1AGruBiW0E",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Status }}",
+                    "rightValue": "Unpaid",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "8243f47b-d049-43cb-a099-21cf3c6e3678"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Unpaid"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "59b2d774-cd05-4a8e-878e-4bdf0c5f9f39",
+                    "leftValue": "={{ $json.Status }}",
+                    "rightValue": "Partial",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Partial"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "749eb652-42ac-463a-bd21-583249797a7a",
+                    "leftValue": "={{ $json.Status }}",
+                    "rightValue": "Paid",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Paid"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        96,
+        -32
+      ],
+      "id": "cd3ef968-d160-47ff-811b-1f1ae0b957f8",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "13j7UMMSb0w_uK3-W4zVHZBUN0NYL-lBBGx7MSkXUilE",
+          "mode": "list",
+          "cachedResultName": "INVOICE",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13j7UMMSb0w_uK3-W4zVHZBUN0NYL-lBBGx7MSkXUilE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1179058943,
+          "mode": "list",
+          "cachedResultName": "Invoice Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13j7UMMSb0w_uK3-W4zVHZBUN0NYL-lBBGx7MSkXUilE/edit#gid=1179058943"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Message Sent": "Yes",
+            "row_number": "={{ $('Get row(s) in sheet').item.json.row_number }}",
+            "Invoice Number": "={{ $('Get row(s) in sheet').item.json[\"Invoice Number\"] }}"
+          },
+          "matchingColumns": [
+            "Invoice Number"
+          ],
+          "schema": [
+            {
+              "id": "Invoice Number",
+              "displayName": "Invoice Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Invoice Date",
+              "displayName": "Invoice Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Due Date",
+              "displayName": "Due Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Invoice Amount($)",
+              "displayName": "Invoice Amount($)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Paid Amount($)",
+              "displayName": "Paid Amount($)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Message Sent",
+              "displayName": "Message Sent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        -16
+      ],
+      "id": "a251c520-5afa-44ca-8b27-837e1f7b0f67",
+      "name": "Update Message Sent Column",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "puIDvD1AGruBiW0E",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=Friendly Reminder: Invoice #{{ $json[\"Invoice Number\"] }} Payment Due",
+        "emailType": "text",
+        "message": "=Hello {{ $json['Client Name'] }},\n\nI hope this message finds you well. This is a friendly reminder that your invoice #{{ $json['Invoice Number'] }}, dated {{ $json['Invoice Date'] }}, for the amount of ${{ $json['Invoice Amount($)'] }} is still unpaid and was due on {{ $json['Due Date'] }}.\n\nPlease make the payment at your earliest convenience. Let us know if you have any questions or need assistance with the payment process.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\nFuzion Tech",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        -256
+      ],
+      "id": "b7e1cfff-9215-4dc4-91e1-0d754ac957f4",
+      "name": "Send Reminder Message for Unpaid",
+      "webhookId": "5e88de77-75e6-4899-9b88-7d7a5ebce06c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "sGGs6j9IqZ5eRl4L",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=Partial Payment Received for Invoice {{ $json[\"Invoice Number\"] }}",
+        "emailType": "text",
+        "message": "=Hello {{ $json['Client Name'] }},\n\nWe wanted to confirm that we have received a partial payment of ${{ $json['Paid Amount($)'] }} for invoice {{ $json['Invoice Number'] }}, dated {{ $json['Invoice Date'] }}. The remaining balance of ${{ $json['Invoice Amount($)'] - $json['Paid Amount($)'] }} is still outstanding.\n\nPlease arrange for the remaining payment by {{ $json['Due Date'] }}. If you have any questions or need to discuss payment options, feel free to get in touch.\n\nThank you for your attention.\n\nBest regards,\nFuzion Tech",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        -16
+      ],
+      "id": "20e026f8-2449-471f-bf39-b65c93e88cb3",
+      "name": "Send Reminder Message for Partial",
+      "webhookId": "5e88de77-75e6-4899-9b88-7d7a5ebce06c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "sGGs6j9IqZ5eRl4L",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=Payment Received for Invoice {{ $json[\"Invoice Number\"] }} – Thank You!",
+        "emailType": "text",
+        "message": "=Hello [Client Name],\n\nThank you for your payment! We have received the full payment for invoice {{ $json['Invoice Number'] }}, dated {{ $json['Invoice Date'] }}, totaling {{ $json['Paid Amount($)'] }}.\n\nWe appreciate your timely payment and look forward to continuing our work with you.\n\nIf you need any further assistance or a receipt, please feel free to reach out.\n\nBest regards,\nFuzion Tech",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        224
+      ],
+      "id": "ee49e6c6-7bc2-4da2-bb61-dc77beb9964b",
+      "name": "Send Thanks Message for Paid",
+      "webhookId": "5e88de77-75e6-4899-9b88-7d7a5ebce06c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "sGGs6j9IqZ5eRl4L",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f3f9591a-824d-47c0-9db2-b0ef84d5f841",
+              "leftValue": "={{ $json[\"Message Sent\"] }}",
+              "rightValue": "No",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -112,
+        -16
+      ],
+      "id": "255613c2-3fd9-4192-b069-0f4e975d1d57",
+      "name": "Filter Unsent Messages"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 18
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -528,
+        -16
+      ],
+      "id": "796655e7-848e-4a40-bb9a-005361c01e09",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter Unsent Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send Reminder Message for Unpaid",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Reminder Message for Partial",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Thanks Message for Paid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Reminder Message for Unpaid": {
+      "main": [
+        [
+          {
+            "node": "Update Message Sent Column",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Reminder Message for Partial": {
+      "main": [
+        [
+          {
+            "node": "Update Message Sent Column",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Thanks Message for Paid": {
+      "main": [
+        [
+          {
+            "node": "Update Message Sent Column",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Unsent Messages": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e676e436-54e8-458f-b997-6a34bb65f0b5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "840154ca8ff3822257170e4b1910defa5b76a2ee2e5b52ef94b6628e655db31a"
+  },
+  "id": "pNMX1zNnpbdEZzG0",
+  "tags": []
+}

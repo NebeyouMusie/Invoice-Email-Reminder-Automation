@@ -1,0 +1,4 @@
+"Invoice Number","Client Name","Invoice Date","Due Date","Invoice Amount","Paid Amount","Status","Email","Reminder Sent"
+"INV-001","John Doe","2025-07-01","2025-07-15","500","0","Unpaid","mailto:john.doe@example.com","No"
+"INV-002","Mary Smith","2025-07-05","2025-07-20","300","300","Paid","mailto:mary.smith@example.com","No"
+"INV-003","Acme Corp","2025-07-10","2025-07-25","1200","600","Partial","mailto:acme@example.com","Yes"
