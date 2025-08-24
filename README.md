@@ -3,7 +3,7 @@
 
 Automate your invoice follow-ups effortlessly with n8n! This project streamlines the process of reminding clients about outstanding payments, thanking those who have paid, and updating records in real-time.
 
-[Invoice Payment Reminder Cover](/images/Invoice%20Payment%20Reminder%20Cover.png)
+![Invoice Payment Reminder Cover](./images/Invoice%20Payment%20Reminder%20Cover.png)
 
 
 ***
@@ -53,7 +53,7 @@ Automate your invoice follow-ups effortlessly with n8n! This project streamlines
 
 ## How It Works
 
-[Invoice Payment Reminder Cover](/images/Invoice%20Payment%20Reminder.png)
+![Invoice Payment Reminder Cover](./images/Invoice%20Payment%20Reminder.png)
 
 ### Workflow Steps
 
@@ -169,7 +169,7 @@ Automate your invoice follow-ups effortlessly with n8n! This project streamlines
 
 Your sheet should look similar to the `Invoice Data.csv` file in the `data` folder.
 
-[Invoice Payment Reminder Cover](/images/Invoice%20Spreadsheet.png)
+![Invoice Payment Reminder Cover](./images/Invoice%20Spreadsheet.png)
 
 
 - **Status**: Values can be “Unpaid”, “Partial”, “Paid”.
