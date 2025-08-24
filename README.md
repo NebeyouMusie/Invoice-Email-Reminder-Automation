@@ -58,23 +58,23 @@ Automate your invoice follow-ups effortlessly with n8n! This project streamlines
 ### Workflow Steps
 
 
-1. **Schedule Trigger**  
-   Initiates the workflow daily at a preset time.
+1. **Schedule Trigger:**
+- Initiates the workflow daily at a preset time.
 
 
-2. **Get Row(s) in Sheet**  
-   Retrieves all invoice records from a specified Google Sheets document.
+2. **Get Row(s) in Sheet:**  
+   - Retrieves all invoice records from a specified Google Sheets document.
 
 
-3. **Filter Unsent Messages**  
-   Filters out invoices where a reminder or thank-you email hasn’t yet been sent (avoids duplicates).
+3. **Filter Unsent Messages:**  
+   - Filters out invoices where a reminder or thank-you email hasn’t yet been sent (avoids duplicates).
 
 
-4. **Switch (Invoice Status Check)**  
-   Evaluates the payment status for each invoice: Unpaid, Partial Paid, or Paid.
+4. **Switch (Invoice Status Check):**  
+   - Evaluates the payment status for each invoice: Unpaid, Partial Paid, or Paid.
 
 
-5. **Send Email via Gmail**  
+5. **Send Email via Gmail:**  
    - **Unpaid:** Sends a reminder message.
    - **Partial:** Sends a partial payment reminder.
    - **Paid:** Sends a thank-you message.
