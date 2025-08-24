@@ -108,7 +108,7 @@ Automate your invoice follow-ups effortlessly with n8n! This project streamlines
 ### 4. Customize Email Templates
 
 - Edit the "Send Message" nodes with your preferred text for Reminders and Thank-You notes
-- Use n8n data expressions for personalization, e.g. `{{ $json["ClientName"] }}`, `{{ $json["InvoiceAmount"] }}`, etc.
+- Use n8n data expressions for personalization, e.g. `{{ $json["Client Name"] }}`, `{{ $json["Invoice Amount"] }}`, etc.
 
 ### 5. Schedule the Trigger
 
